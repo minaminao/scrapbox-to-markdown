@@ -22,7 +22,7 @@ const nodesToText = (nodes: any) => {
       text += "# " + node["text"];
       if ("nodes" in node)
         throw new Error();
-      text += "\n";
+      text += "\n\n";
     }
     else if (type == "line") {
       const indent = node["indent"];
@@ -32,6 +32,9 @@ const nodesToText = (nodes: any) => {
       }
       text += nodesToText(node["nodes"]);
       text += "\n";
+      if (indent == 0) {
+        text += "\n";
+      }
     }
     else if (type == "quote") {
       text += ">";
