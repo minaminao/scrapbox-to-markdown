@@ -15,7 +15,6 @@ npx ts-node src/main.ts example.txt > example-result.md
 Syntax
 [https://gyazo.com/0f82099330f378fe4917a1b4a5fe8815]
 
-
 [[Internal Links]] (linking to another page on scrapbox)
 	`[link]` ⇒ [Link]
 
@@ -32,16 +31,22 @@ is converted to
 
 ```md
 # Syntax
+
 ![](https://gyazo.com/0f82099330f378fe4917a1b4a5fe8815/thumb/1000)
 
 
+
 **Internal Links** (linking to another page on scrapbox)
+
 - `[link]` ⇒ [Link](Link)
 
+
 **External  Links** (linking to another web page)
+
 - `http://google.com` ⇒ [](http://google.com)
 - `[http://google.com Google]` ⇒ [Google](http://google.com)
 or
+
 - `[Google http://google.com]` ⇒ [Google](http://google.com)
 
 ...

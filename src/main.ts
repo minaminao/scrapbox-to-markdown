@@ -45,7 +45,8 @@ const nodesToText = (nodes: any) => {
     }
     else if (type == "decoration") {
       if (node["rawDecos"][0] == "*") {
-        text += "**" + nodesToText(node["nodes"]) + "**";
+        const level = Math.max(1, 5 - node["rawDecos"].length);
+        text += "#".repeat(level) + " " + nodesToText(node["nodes"]);
       } else if (node["rawDecos"][0] == "/") {
         text += "*" + nodesToText(node["nodes"]) + "*";
       } else if (node["rawDecos"][0] == "-") {

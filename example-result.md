@@ -4,8 +4,6 @@
 
 
 
-
-
 **Internal Links** (linking to another page on scrapbox)
 
 - `[link]` ⇒ [Link](Link)
@@ -83,7 +81,7 @@ or
 
 
 
-**Mouse based styling**
+#### Mouse based styling
 
 ![](https://gyazo.com/a515ab169b1e371641f7e04bfa92adbc/thumb/1000)
 
@@ -121,14 +119,26 @@ function () {
 
 
 
-**[Mathematical notation](Mathematical_notation)**
+#### [Mathematical notation](Mathematical_notation)
 
 - Using [TeX](https://en.wikipedia.org/wiki/TeX) inside of brackets with a dollar sign `[$ TeX here ]`, you can format math or science formulas, like so: $E = mc^2$
 
 
-**[Userscript](Userscript)**
+#### [Userscript](Userscript)
 
 - You can even add javascript to customize Scrapbox to your liking.
 
+
+# *-6
+
+# *-5
+
+# *-4
+
+## *-3
+
+### *-2
+
+#### *-1
 
 

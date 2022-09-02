@@ -1,7 +1,6 @@
 Syntax
 [https://gyazo.com/0f82099330f378fe4917a1b4a5fe8815]
 
-
 [[Internal Links]] (linking to another page on scrapbox)
 	`[link]` ⇒ [Link]
 
@@ -84,3 +83,10 @@ table:hello
 
 [* [Userscript]]
 	You can even add javascript to customize Scrapbox to your liking.
+
+[****** *-6]
+[***** *-5]
+[**** *-4]
+[*** *-3]
+[** *-2]
+[* *-1]
