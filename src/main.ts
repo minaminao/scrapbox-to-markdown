@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { parse } from "@progfay/scrapbox-parser";
-import * as fs from "fs"
+import fs from "fs"
 
 if (process.argv.length != 3) {
   console.log("Usage: npx ts-node src/main.ts <FILENAME>")
@@ -45,8 +45,12 @@ const nodesToText = (nodes: any) => {
     }
     else if (type == "decoration") {
       if (node["rawDecos"][0] == "*") {
-        const level = Math.max(1, 5 - node["rawDecos"].length);
-        text += "#".repeat(level) + " " + nodesToText(node["nodes"]);
+        if (node["rawDecos"].length == 1) {
+          text += "**" + nodesToText(node["nodes"]) + "**";
+        } else {
+          const level = Math.max(1, 5 - node["rawDecos"].length);
+          text += "#".repeat(level) + " " + nodesToText(node["nodes"]);
+        }
       } else if (node["rawDecos"][0] == "/") {
         text += "*" + nodesToText(node["nodes"]) + "*";
       } else if (node["rawDecos"][0] == "-") {
@@ -83,6 +87,7 @@ const nodesToText = (nodes: any) => {
     }
     else if (type == "codeBlock") {
       // The indent is ignored.
+      // TODO 
       text += "```\n";
       text += node["content"]
       text += "\n```\n";
