@@ -112,8 +112,14 @@ const nodesToText = (nodes: any) => {
     else if (type == "formula") {
       text += "$" + node["formula"] + "$";
     }
+    else if (type == "hashTag") {
+      text += node["raw"];
+    }
+    else if (type == "blank") {
+      text += node["raw"];
+    }
     else {
-      console.log(node);
+      console.error(node);
       throw new Error();
     }
   }
