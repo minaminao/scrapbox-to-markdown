@@ -23,12 +23,12 @@ node build/index.js examples/example.txt
 
 For Obsidian markdown:
 ```
-node build/index.js examples/example.txt --obsidian
+scrapbox-to-markdown examples/example.txt --obsidian
 ```
 
 If you want to output to a file:
 ```
-node build/index.js examples/example.txt -o examples/example.md
+scrapbox-to-markdow examples/example.txt -o examples/example.md
 ```
 
 ## Example

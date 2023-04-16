@@ -1,7 +1,7 @@
 {
   "name": "scrapbox-to-markdown",
   "version": "0.0.1",
-  "bin" : {
+  "bin": {
     "scrapbox-to-markdown": "build/index.js",
     "s2m": "build/index.js"
   },
@@ -11,12 +11,19 @@
   },
   "devDependencies": {
     "@types/node": "^18.15.11",
+    "@typescript-eslint/eslint-plugin": "^5.58.0",
+    "@typescript-eslint/parser": "^5.58.0",
+    "eslint": "^8.38.0",
+    "eslint-config-prettier": "^8.8.0",
+    "prettier": "2.8.7",
     "typescript": "^5.0.4"
   },
   "scripts": {
     "build": "pnpm tsc",
     "execute": "pnpm tsc && node build/index.js",
     "global-install": "pnpm link -g",
-    "test": "pnpm tsc && node build/index.js examples/example.txt -o examples/example.md"
+    "test": "pnpm tsc && node build/index.js examples/example.txt -o examples/example.md",
+    "lint": "pnpm eslint --ext .ts src",
+    "format": "pnpm prettier src --write src"
   }
 }

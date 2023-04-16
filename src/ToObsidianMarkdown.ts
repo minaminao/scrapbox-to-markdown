@@ -8,11 +8,9 @@ const scrapboxNodesToObsidianMarkdownText = (nodes: Page | Node[]) => {
         const type = node["type"];
         if (type == "title") {
             text += "# " + node["text"];
-            if ("nodes" in node)
-                throw new Error();
+            if ("nodes" in node) throw new Error();
             text += "\n\n";
-        }
-        else if (type == "line") {
+        } else if (type == "line") {
             const indent = node["indent"];
             if (indent > 0) {
                 text += " ".repeat(TAB_WIDTH * (indent - 1));
@@ -20,15 +18,12 @@ const scrapboxNodesToObsidianMarkdownText = (nodes: Page | Node[]) => {
             }
             text += scrapboxNodesToObsidianMarkdownText(node["nodes"]);
             text += "\n";
-        }
-        else if (type == "quote") {
+        } else if (type == "quote") {
             text += ">";
             text += scrapboxNodesToObsidianMarkdownText(node["nodes"]);
-        }
-        else if (type == "plain") {
+        } else if (type == "plain") {
             text += node["raw"];
-        }
-        else if (type == "decoration") {
+        } else if (type == "decoration") {
             if (node["rawDecos"][0] == "*") {
                 if (node["rawDecos"].length == 1) {
                     text += "**" + scrapboxNodesToObsidianMarkdownText(node["nodes"]) + "**";
@@ -43,8 +38,7 @@ const scrapboxNodesToObsidianMarkdownText = (nodes: Page | Node[]) => {
             } else {
                 throw new Error();
             }
-        }
-        else if (type == "link") {
+        } else if (type == "link") {
             if (node["pathType"] == "root") {
                 text += "[" + node["href"] + "](https://scrapbox.io" + node["href"] + ")";
             } else if (node["pathType"] == "absolute") {
@@ -54,30 +48,23 @@ const scrapboxNodesToObsidianMarkdownText = (nodes: Page | Node[]) => {
             } else {
                 throw new Error();
             }
-        }
-        else if (type == "icon") {
+        } else if (type == "icon") {
             text += "(" + node["path"] + ")";
-        }
-        else if (type == "commandLine") {
+        } else if (type == "commandLine") {
             text += "`" + node["raw"] + "`";
-        }
-        else if (type == "image") {
+        } else if (type == "image") {
             text += "![](" + node["src"] + ")";
-        }
-        else if (type == "strong") {
+        } else if (type == "strong") {
             text += "**" + scrapboxNodesToObsidianMarkdownText(node["nodes"]) + "**";
-        }
-        else if (type == "code") {
+        } else if (type == "code") {
             text += "`" + node["text"] + "`";
-        }
-        else if (type == "codeBlock") {
+        } else if (type == "codeBlock") {
             // The indent is ignored.
-            // TODO 
+            // TODO
             text += "```\n";
-            text += node["content"]
+            text += node["content"];
             text += "\n```\n";
-        }
-        else if (type == "table") {
+        } else if (type == "table") {
             // The indent is ignored.
             text += "\n";
             for (let i = 0; i < node["cells"].length; i++) {
@@ -88,30 +75,26 @@ const scrapboxNodesToObsidianMarkdownText = (nodes: Page | Node[]) => {
                 text += "|\n";
                 if (i == 0) {
                     for (let j = 0; j < cell_line.length; j++) {
-                        text += "|--"
+                        text += "|--";
                     }
                     text += "|\n";
                 }
             }
-        }
-        else if (type == "formula") {
+        } else if (type == "formula") {
             text += "$" + node["formula"] + "$";
-        }
-        else if (type == "hashTag") {
+        } else if (type == "hashTag") {
             text += node["raw"];
-        }
-        else if (type == "blank") {
+        } else if (type == "blank") {
             text += node["raw"];
-        }
-        else {
+        } else {
             console.error(node);
             throw new Error();
         }
     }
     return text;
-}
+};
 
 export const scrapboxToObsidianMarkdown = (text: string) => {
     const nodes = parse(text);
     return scrapboxNodesToObsidianMarkdownText(nodes);
-}
+};
