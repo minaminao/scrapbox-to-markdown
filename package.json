@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@progfay/scrapbox-parser": "^8.1.0",
+    "@progfay/scrapbox-parser": "git+https://github.com/progfay/scrapbox-parser.git",
     "@types/node": "^18.7.14"
   }
 }
