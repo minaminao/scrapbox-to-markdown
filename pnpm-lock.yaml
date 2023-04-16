@@ -4,15 +4,26 @@ dependencies:
   '@progfay/scrapbox-parser':
     specifier: git+https://github.com/progfay/scrapbox-parser.git
     version: github.com/progfay/scrapbox-parser/b7162474fc66d817e7d0e688445bc65101eae375
+
+devDependencies:
   '@types/node':
-    specifier: ^18.7.14
-    version: 18.7.14
+    specifier: ^18.15.11
+    version: 18.15.11
+  typescript:
+    specifier: ^5.0.4
+    version: 5.0.4
 
 packages:
 
-  /@types/node@18.7.14:
-    resolution: {integrity: sha512-6bbDaETVi8oyIARulOE9qF1/Qdi/23z6emrUh0fNJRUmjznqrixD4MpGDdgOFk5Xb0m2H6Xu42JGdvAxaJR/wA==}
-    dev: false
+  /@types/node@18.15.11:
+    resolution: {integrity: sha512-E5Kwq2n4SbMzQOn6wnmBjuK9ouqlURrcZDVfbo9ftDDTFt3nk7ZKK4GMOzoYgnpQJKcxwQw+lGaBvvlMo0qN/Q==}
+    dev: true
+
+  /typescript@5.0.4:
+    resolution: {integrity: sha512-cW9T5W9xY37cc+jfEnaUvX91foxtHkza3Nw3wkoF4sSlKn0MONdkdEndig/qPBWXNkmplh3NzayQzCiHM4/hqw==}
+    engines: {node: '>=12.20'}
+    hasBin: true
+    dev: true
 
   github.com/progfay/scrapbox-parser/b7162474fc66d817e7d0e688445bc65101eae375:
     resolution: {tarball: https://codeload.github.com/progfay/scrapbox-parser/tar.gz/b7162474fc66d817e7d0e688445bc65101eae375}
