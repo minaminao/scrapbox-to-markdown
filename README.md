@@ -4,7 +4,8 @@ A CLI application to convert Scrapbox text to Markdown using [progfay/scrapbox-p
 
 ## Usage
 ```
-npx ts-node src/main.ts example.txt > example-result.md
+pnpm tsc
+node build/index.js example.txt
 ```
 
 ## Example
