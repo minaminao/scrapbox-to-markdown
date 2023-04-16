@@ -1,4 +1,4 @@
-import { parse } from "@progfay/scrapbox-parser";
+import { parse, Page, Node } from "@progfay/scrapbox-parser";
 
 const TAB_WIDTH = 4;
 
@@ -6,7 +6,7 @@ const convertHref = (href: string) => {
     return href.replace(" ", "_");
 }
 
-const scrapboxNodesToMarkdownText = (nodes: any) => {
+const scrapboxNodesToMarkdownText = (nodes: Page | Node[]) => {
     let text = "";
     for (const node of nodes) {
         const type = node["type"];

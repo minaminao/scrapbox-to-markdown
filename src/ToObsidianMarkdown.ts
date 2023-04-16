@@ -1,13 +1,8 @@
-#!/usr/bin/env node
-import { parse } from "@progfay/scrapbox-parser";
+import { parse, Page, Node } from "@progfay/scrapbox-parser";
 
 const TAB_WIDTH = 4;
 
-const _convertHref = (href: string) => {
-    return href.replace(" ", "_");
-}
-
-const scrapboxNodesToObsidianMarkdownText = (nodes: any) => {
+const scrapboxNodesToObsidianMarkdownText = (nodes: Page | Node[]) => {
     let text = "";
     for (const node of nodes) {
         const type = node["type"];
