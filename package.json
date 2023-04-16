@@ -1,4 +1,10 @@
 {
+  "name": "scrapbox-to-markdown",
+  "version": "0.0.1",
+  "bin" : {
+    "scrapbox-to-markdown": "build/index.js",
+    "s2m": "build/index.js"
+  },
   "dependencies": {
     "@progfay/scrapbox-parser": "git+https://github.com/progfay/scrapbox-parser.git",
     "commander": "^10.0.1"
@@ -9,6 +15,8 @@
   },
   "scripts": {
     "build": "pnpm tsc",
-    "run": "pnpm tsc && node build/index.js"
+    "execute": "pnpm tsc && node build/index.js",
+    "global-install": "pnpm link -g",
+    "test": "pnpm tsc && node build/index.js examples/example.txt -o examples/example.md"
   }
 }

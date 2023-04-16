@@ -2,15 +2,38 @@
 
 A CLI application to convert Scrapbox text to Markdown using [progfay/scrapbox-parser](https://github.com/progfay/scrapbox-parser).
 
-## Usage
+
+# Install & Usage
+
+Clone this repo and then execute the following commands.
+
+```
+pnpm global-install
+scrapbox-to-markdown examples/example.txt
+```
+
+or
+
 ```
 pnpm tsc
-node build/index.js example.txt
+node build/index.js examples/example.txt
+```
+
+`s2m` is an alias for `scrapbox-to-markdown`.
+
+For Obsidian markdown:
+```
+node build/index.js examples/example.txt --obsidian
+```
+
+If you want to output to a file:
+```
+node build/index.js examples/example.txt -o examples/example.md
 ```
 
 ## Example
 
-[example.txt](example.txt) based on https://scrapbox.io/help/syntax is converted to [example-result.md](example-result.md) as follows:
+[example.txt](src/example.txt) based on https://scrapbox.io/help/syntax is converted to [example.md](src/example.md) as follows:
 
 ```
 Syntax

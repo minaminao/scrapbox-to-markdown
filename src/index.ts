@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import * as fs from "fs";
 import { Command } from 'commander';
 import { scrapboxToMarkdown } from "./ToMarkdown";
@@ -6,7 +7,7 @@ import { scrapboxToObsidianMarkdown } from "./ToObsidianMarkdown";
 const program = new Command();
 
 program
-    .name("s2m")
+    .name("scrapbox-to-markdown")
     .description("A CLI application to convert Scrapbox text to Markdown")
     .arguments('<filename>')
     .usage("<filename> [options]")
