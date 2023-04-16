@@ -4,6 +4,9 @@ dependencies:
   '@progfay/scrapbox-parser':
     specifier: git+https://github.com/progfay/scrapbox-parser.git
     version: github.com/progfay/scrapbox-parser/b7162474fc66d817e7d0e688445bc65101eae375
+  commander:
+    specifier: ^10.0.1
+    version: 10.0.1
 
 devDependencies:
   '@types/node':
@@ -18,6 +21,11 @@ packages:
   /@types/node@18.15.11:
     resolution: {integrity: sha512-E5Kwq2n4SbMzQOn6wnmBjuK9ouqlURrcZDVfbo9ftDDTFt3nk7ZKK4GMOzoYgnpQJKcxwQw+lGaBvvlMo0qN/Q==}
     dev: true
+
+  /commander@10.0.1:
+    resolution: {integrity: sha512-y4Mg2tXshplEbSGzx7amzPwKKOCGuoSRP/CjEdwwk0FOGlUbq6lKuoyDZTNZkmxHdJtp54hdfY/JUrdL7Xfdug==}
+    engines: {node: '>=14'}
+    dev: false
 
   /typescript@5.0.4:
     resolution: {integrity: sha512-cW9T5W9xY37cc+jfEnaUvX91foxtHkza3Nw3wkoF4sSlKn0MONdkdEndig/qPBWXNkmplh3NzayQzCiHM4/hqw==}

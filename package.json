@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "@progfay/scrapbox-parser": "git+https://github.com/progfay/scrapbox-parser.git"
+    "@progfay/scrapbox-parser": "git+https://github.com/progfay/scrapbox-parser.git",
+    "commander": "^10.0.1"
   },
   "devDependencies": {
     "@types/node": "^18.15.11",
