@@ -33,10 +33,15 @@ program
             } else if (options.copyAndOutput) {
                 const title = text.split("\n")[0];
                 const body = markdownText.split("\n").slice(1).join("\n");
+
                 let dir = options.copyAndOutput;
-                if (dir.slice(-1) != "/")
-                    dir += "/";
-                fs.writeFile(dir + title + ".md", body, (err) => {
+                if (dir.slice(-1) != "/") dir += "/";
+
+                const filePath = dir + title + ".md";
+
+                if (fs.existsSync(filePath)) throw new Error("File already exists.");
+
+                fs.writeFile(filePath, body, (err) => {
                     if (err) throw new Error("Failed to write file.");
                 });
             } else {
