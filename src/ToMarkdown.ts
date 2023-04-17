@@ -82,8 +82,7 @@ const scrapboxNodesToMarkdownText = (nodes: Page | Node[], scrapboxType: Scrapbo
             text += "`" + node["text"] + "`";
         } else if (type == "codeBlock") {
             // The indent is ignored.
-            // TODO
-            text += "```\n";
+            text += "```" + node.fileName + "\n";
             text += node["content"];
             text += "\n```\n";
         } else if (type == "table") {
