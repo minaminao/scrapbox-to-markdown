@@ -20,7 +20,8 @@ const scrapboxNodesToMarkdownText = (nodes: Page | Node[], scrapboxType: Scrapbo
             const indent = node.indent;
             if (indent > 0) {
                 text += " ".repeat(TAB_WIDTH * (indent - 1));
-                text += "- ";
+                if (node.nodes[0].type != "numberList")
+                    text += "- ";
             }
             text += scrapboxNodesToMarkdownText(node.nodes, scrapboxType, markdownType);
             text += "\n";
@@ -107,6 +108,8 @@ const scrapboxNodesToMarkdownText = (nodes: Page | Node[], scrapboxType: Scrapbo
             text += node.raw;
         } else if (type == "blank") {
             text += node.raw;
+        } else if (type == "numberList") {
+            text += node.rawNumber + ". " + scrapboxNodesToMarkdownText(node.nodes, scrapboxType, markdownType);
         } else {
             console.error(node);
             throw new Error();
