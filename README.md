@@ -1,6 +1,6 @@
 # scrapbox-to-markdown
 
-A CLI application to convert Scrapbox text to Markdown using [progfay/scrapbox-parser](https://github.com/progfay/scrapbox-parser).
+A CLI application to convert Scrapbox text to Markdown (GitHub/Obsidian-flavored) using [progfay/scrapbox-parser](https://github.com/progfay/scrapbox-parser).
 
 
 # Install & Usage
@@ -30,6 +30,8 @@ If you want to output to a file:
 ```
 scrapbox-to-markdow examples/example.txt -o examples/example.md
 ```
+
+A tip: `pbpaste > /tmp/s2m | s2m /tmp/s2m | pbcopy`
 
 ## Example
 

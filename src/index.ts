@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 import * as fs from "fs";
-import { Command } from "commander";
+import { Command, Option } from "commander";
 import { scrapboxToMarkdown } from "./ToMarkdown";
 import { scrapboxToObsidianMarkdown } from "./ToObsidianMarkdown";
+import { minaminaoScrapboxToObsidianMarkdown } from "./MinaminaoScrapboxToObsidianMarkdown";
 
 const program = new Command();
 
@@ -13,6 +14,7 @@ program
     .usage("<filename> [options]")
     .option("-o, --output <filename>", "Output file name")
     .option("--obsidian", "Output in Obsidian Markdown format")
+    .addOption(new Option("--minaminao").hideHelp())
     .action((filename, options) => {
         fs.readFile(filename, "utf8", (err, text) => {
             if (err) {
@@ -20,7 +22,9 @@ program
             }
 
             let markdownText;
-            if (options.obsidian) {
+            if (options.minaminao) {
+                markdownText = minaminaoScrapboxToObsidianMarkdown(text);
+            } else if (options.obsidian) {
                 markdownText = scrapboxToObsidianMarkdown(text);
             } else {
                 markdownText = scrapboxToMarkdown(text);
