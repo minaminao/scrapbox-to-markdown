@@ -1,4 +1,4 @@
 export enum MarkdownType {
     GitHub,
-    Obsidian
+    Obsidian,
 }

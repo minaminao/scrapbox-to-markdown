@@ -15,6 +15,7 @@ program
     .option("-o, --output <filename>", "Output file name")
     .option("--obsidian", "Output in Obsidian Markdown format")
     .addOption(new Option("--minaminao").hideHelp())
+    .addOption(new Option("--copy-and-output <dir>").hideHelp())
     .action((filename, options) => {
         fs.readFile(filename, "utf8", (err, text) => {
             if (err) {
@@ -27,9 +28,16 @@ program
 
             if (options.output) {
                 fs.writeFile(options.output, markdownText, (err) => {
-                    if (err) {
-                        throw new Error("Failed to write file.");
-                    }
+                    if (err) throw new Error("Failed to write file.");
+                });
+            } else if (options.copyAndOutput) {
+                const title = text.split("\n")[0];
+                const body = markdownText.split("\n").slice(1).join("\n");
+                let dir = options.copyAndOutput;
+                if (dir.slice(-1) != "/")
+                    dir += "/";
+                fs.writeFile(dir + title + ".md", body, (err) => {
+                    if (err) throw new Error("Failed to write file.");
                 });
             } else {
                 console.log(markdownText);
