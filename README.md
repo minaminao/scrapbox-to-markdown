@@ -31,7 +31,9 @@ If you want to output to a file:
 scrapbox-to-markdow examples/example.txt -o examples/example.md
 ```
 
-A tip: `pbpaste > /tmp/s2m | s2m /tmp/s2m | pbcopy`
+Tips
+- `pbpaste > /tmp/s2m | s2m /tmp/s2m | pbcopy`
+- `pbpaste > /tmp/s2m | s2m /tmp/s2m --obsidian | tail -n +2 | pbcopy`
 
 ## Example
 

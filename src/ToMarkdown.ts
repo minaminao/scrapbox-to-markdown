@@ -1,4 +1,6 @@
 import { parse, Page, Node } from "@progfay/scrapbox-parser";
+import { MarkdownType } from "./MarkdownType";
+import { ScrapboxType } from "./ScrapboxType";
 
 const TAB_WIDTH = 4;
 
@@ -6,7 +8,7 @@ const convertHref = (href: string) => {
     return href.replace(" ", "_");
 };
 
-const scrapboxNodesToMarkdownText = (nodes: Page | Node[]) => {
+const scrapboxNodesToMarkdownText = (nodes: Page | Node[], scrapboxType: ScrapboxType, markdownType: MarkdownType) => {
     let text = "";
     for (const node of nodes) {
         const type = node["type"];
@@ -20,39 +22,49 @@ const scrapboxNodesToMarkdownText = (nodes: Page | Node[]) => {
                 text += " ".repeat(TAB_WIDTH * (indent - 1));
                 text += "- ";
             }
-            text += scrapboxNodesToMarkdownText(node["nodes"]);
+            text += scrapboxNodesToMarkdownText(node["nodes"], scrapboxType, markdownType);
             text += "\n";
-            if (indent == 0) {
+            if (markdownType == MarkdownType.GitHub && indent == 0) {
                 text += "\n";
             }
         } else if (type == "quote") {
             text += ">";
-            text += scrapboxNodesToMarkdownText(node["nodes"]);
+            text += scrapboxNodesToMarkdownText(node["nodes"], scrapboxType, markdownType);
         } else if (type == "plain") {
             text += node["raw"];
         } else if (type == "decoration") {
             if (node["rawDecos"][0] == "*") {
                 if (node["rawDecos"].length == 1) {
-                    text += "**" + scrapboxNodesToMarkdownText(node["nodes"]) + "**";
+                    text += "**" + scrapboxNodesToMarkdownText(node["nodes"], scrapboxType, markdownType) + "**";
                 } else {
                     const level = Math.max(1, 5 - node["rawDecos"].length);
-                    text += "#".repeat(level) + " " + scrapboxNodesToMarkdownText(node["nodes"]);
+                    text += "#".repeat(level) + " " + scrapboxNodesToMarkdownText(node["nodes"], scrapboxType, markdownType);
                 }
             } else if (node["rawDecos"][0] == "/") {
-                text += "*" + scrapboxNodesToMarkdownText(node["nodes"]) + "*";
+                text += "*" + scrapboxNodesToMarkdownText(node["nodes"], scrapboxType, markdownType) + "*";
             } else if (node["rawDecos"][0] == "-") {
-                text += "~~" + scrapboxNodesToMarkdownText(node["nodes"]) + "~~";
+                text += "~~" + scrapboxNodesToMarkdownText(node["nodes"], scrapboxType, markdownType) + "~~";
             } else {
+                console.error(node);
                 throw new Error();
             }
         } else if (type == "link") {
             if (node["pathType"] == "root") {
                 text += "[" + node["href"] + "](https://scrapbox.io" + node["href"] + ")";
             } else if (node["pathType"] == "absolute") {
-                text += "[" + node["content"] + "](" + node["href"] + ")";
+                if (node["content"] == "") {
+                    text += node["raw"];
+                } else {
+                    text += "[" + node["content"] + "](" + node["href"] + ")";
+                }
             } else if (node["pathType"] == "relative") {
-                text += "[" + node["href"] + "](" + convertHref(node["href"]) + ")";
+                if (markdownType == MarkdownType.GitHub) {
+                    text += "[" + node["href"] + "](" + convertHref(node["href"]) + ")";
+                } else if (markdownType == MarkdownType.Obsidian) {
+                    text += "[[" + node["href"] + "]]";
+                }
             } else {
+                console.error(node);
                 throw new Error();
             }
         } else if (type == "icon") {
@@ -62,7 +74,7 @@ const scrapboxNodesToMarkdownText = (nodes: Page | Node[]) => {
         } else if (type == "image") {
             text += "![](" + node["src"] + ")";
         } else if (type == "strong") {
-            text += "**" + scrapboxNodesToMarkdownText(node["nodes"]) + "**";
+            text += "**" + scrapboxNodesToMarkdownText(node["nodes"], scrapboxType, markdownType) + "**";
         } else if (type == "code") {
             text += "`" + node["text"] + "`";
         } else if (type == "codeBlock") {
@@ -77,7 +89,7 @@ const scrapboxNodesToMarkdownText = (nodes: Page | Node[]) => {
             for (let i = 0; i < node["cells"].length; i++) {
                 const cell_line = node["cells"][i];
                 for (let j = 0; j < cell_line.length; j++) {
-                    text += "|" + scrapboxNodesToMarkdownText(cell_line[j]);
+                    text += "|" + scrapboxNodesToMarkdownText(cell_line[j], scrapboxType, markdownType);
                 }
                 text += "|\n";
                 if (i == 0) {
@@ -101,7 +113,7 @@ const scrapboxNodesToMarkdownText = (nodes: Page | Node[]) => {
     return text;
 };
 
-export const scrapboxToMarkdown = (text: string) => {
+export const scrapboxToMarkdown = (text: string, scrapboxType: ScrapboxType, markdownType: MarkdownType) => {
     const nodes = parse(text);
-    return scrapboxNodesToMarkdownText(nodes);
+    return scrapboxNodesToMarkdownText(nodes, scrapboxType, markdownType);
 };

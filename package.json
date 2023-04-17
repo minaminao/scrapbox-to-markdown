@@ -21,9 +21,10 @@
   "scripts": {
     "build": "pnpm tsc",
     "execute": "pnpm tsc && node build/index.js",
-    "global-install": "pnpm link -g",
+    "global-install": "pnpm tsc && pnpm link -g",
     "test": "pnpm tsc && node build/index.js examples/example.txt -o examples/example.md",
     "lint": "pnpm eslint --ext .ts src",
-    "format": "pnpm prettier src --write src"
+    "format": "pnpm prettier src --write src",
+    "clean": "rm -rf build"
   }
 }

@@ -2,8 +2,8 @@
 import * as fs from "fs";
 import { Command, Option } from "commander";
 import { scrapboxToMarkdown } from "./ToMarkdown";
-import { scrapboxToObsidianMarkdown } from "./ToObsidianMarkdown";
-import { minaminaoScrapboxToObsidianMarkdown } from "./MinaminaoScrapboxToObsidianMarkdown";
+import { ScrapboxType } from "./ScrapboxType";
+import { MarkdownType } from "./MarkdownType";
 
 const program = new Command();
 
@@ -21,14 +21,9 @@ program
                 throw new Error("File not found.");
             }
 
-            let markdownText;
-            if (options.minaminao) {
-                markdownText = minaminaoScrapboxToObsidianMarkdown(text);
-            } else if (options.obsidian) {
-                markdownText = scrapboxToObsidianMarkdown(text);
-            } else {
-                markdownText = scrapboxToMarkdown(text);
-            }
+            const scrapboxType = options.minaminao ? ScrapboxType.Minaminao : ScrapboxType.Normal;
+            const markdownType = options.obsidian ? MarkdownType.Obsidian : MarkdownType.GitHub;
+            const markdownText = scrapboxToMarkdown(text, scrapboxType, markdownType);
 
             if (options.output) {
                 fs.writeFile(options.output, markdownText, (err) => {
