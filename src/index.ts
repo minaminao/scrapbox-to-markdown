@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import * as fs from "fs";
 import { Command, Option } from "commander";
-import { scrapboxToMarkdown } from "./ToMarkdown";
+import { scrapboxToMarkdown, sanitizeFilename } from "./ToMarkdown";
 import { ScrapboxType } from "./ScrapboxType";
 import { MarkdownType } from "./MarkdownType";
 
@@ -38,7 +38,7 @@ program
                     });
                 }
             } else if (options.copyAndOutput) {
-                const title = text.split("\n")[0];
+                const title = sanitizeFilename(text.split("\n")[0]);
                 const body = markdownText.split("\n").slice(1).join("\n");
 
                 let dir = options.copyAndOutput;
