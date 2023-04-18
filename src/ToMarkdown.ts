@@ -79,10 +79,10 @@ const scrapboxNodesToMarkdownText = (nodes: Page | Node[], scrapboxType: Scrapbo
         } else if (type == "code") {
             text += "`" + node.text + "`";
         } else if (type == "codeBlock") {
-            // The indent is ignored.
-            text += "```" + node.fileName + "\n";
-            text += node.content;
-            text += "\n```\n";
+            const indentSpaces = " ".repeat(TAB_WIDTH * (node.indent - 1));
+            text += indentSpaces + "```" + node.fileName + "\n";
+            text += indentSpaces + node.content.split("\n").join("\n" + indentSpaces) + "\n";
+            text += indentSpaces + "```\n";
         } else if (type == "table") {
             // The indent is ignored.
             text += "\n";
