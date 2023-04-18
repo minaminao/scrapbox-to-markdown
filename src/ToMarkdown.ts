@@ -23,14 +23,13 @@ const scrapboxNodesToMarkdownText = (nodes: Page | Node[], scrapboxType: Scrapbo
             if ("nodes" in node) throw new Error();
             text += "\n\n";
         } else if (type == "line") {
-            const indent = node.indent;
-            if (indent > 0) {
-                text += " ".repeat(TAB_WIDTH * (indent - 1));
+            if (node.indent > 0) {
+                text += " ".repeat(TAB_WIDTH * (node.indent - 1));
                 if (node.nodes[0].type != "numberList") text += "- ";
             }
             text += scrapboxNodesToMarkdownText(node.nodes, scrapboxType, markdownType);
             text += "\n";
-            if (markdownType == MarkdownType.GitHub && indent == 0) {
+            if (markdownType == MarkdownType.GitHub && node.indent == 0) {
                 text += "\n";
             }
         } else if (type == "quote") {
@@ -85,7 +84,7 @@ const scrapboxNodesToMarkdownText = (nodes: Page | Node[], scrapboxType: Scrapbo
         } else if (type == "code") {
             text += "`" + node.text + "`";
         } else if (type == "codeBlock") {
-            const indentSpaces = " ".repeat(TAB_WIDTH * (node.indent - 1));
+            const indentSpaces = node.indent > 0 ? " ".repeat(TAB_WIDTH * (node.indent - 1)) : "";
             text += indentSpaces + "```" + node.fileName + "\n";
             text += indentSpaces + node.content.split("\n").join("\n" + indentSpaces) + "\n";
             text += indentSpaces + "```\n";
