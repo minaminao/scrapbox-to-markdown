@@ -8,6 +8,10 @@ const convertHref = (href: string) => {
     return href.replace(" ", "_");
 };
 
+const sanitizeLinkTitle = (title: string) => {
+    return title.replace(/_/g, "\\_");
+};
+
 export const sanitizeFilename = (filename: string) => {
     filename = filename.replace(/: /g, " - ");
     filename = filename.replace(/:/g, " - ");
@@ -61,11 +65,11 @@ const scrapboxNodesToMarkdownText = (nodes: Page | Node[], scrapboxType: Scrapbo
                 if (node.content == "") {
                     text += node.raw;
                 } else {
-                    text += "[" + node.content + "](" + node.href + ")";
+                    text += "[" + sanitizeLinkTitle(node.content) + "](" + node.href + ")";
                 }
             } else if (node.pathType == "relative") {
                 if (markdownType == MarkdownType.GitHub) {
-                    text += "[" + node.href + "](" + convertHref(node.href) + ")";
+                    text += "[" + sanitizeLinkTitle(node.href) + "](" + convertHref(node.href) + ")";
                 } else if (markdownType == MarkdownType.Obsidian) {
                     text += "[[" + sanitizeFilename(node.href) + "]]";
                 }
