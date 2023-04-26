@@ -29,7 +29,8 @@ const scrapboxNodesToMarkdownText = (nodes: Page | Node[], scrapboxType: Scrapbo
         } else if (type == "line") {
             if (node.indent > 0) {
                 text += " ".repeat(TAB_WIDTH * (node.indent - 1));
-                if (node.nodes[0].type != "numberList") text += "- ";
+                // If there is no content in the list item, node.nodes will be empty.
+                if (node.nodes.length == 0 || node.nodes[0].type != "numberList") text += "- ";
             }
             text += scrapboxNodesToMarkdownText(node.nodes, scrapboxType, markdownType);
             text += "\n";
