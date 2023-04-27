@@ -9,7 +9,7 @@ const convertHref = (href: string) => {
 };
 
 const sanitizeLinkTitle = (title: string) => {
-    return title.replace(/_/g, "\\_");
+    return title.replace(/_/g, "\\_").replace(/\*/g, "\\*");
 };
 
 export const sanitizeFilename = (filename: string) => {
