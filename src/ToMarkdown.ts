@@ -1,4 +1,4 @@
-import { parse, Page, Node } from "@progfay/scrapbox-parser";
+import { parse, Page, Node, ImageNode } from "@progfay/scrapbox-parser";
 import { MarkdownType } from "./MarkdownType";
 import { ScrapboxType } from "./ScrapboxType";
 
@@ -16,6 +16,19 @@ export const sanitizeFilename = (filename: string) => {
     filename = filename.replace(/: /g, " - ");
     filename = filename.replace(/:/g, " - ");
     return filename;
+};
+
+const scrapboxImageNodeToMarkdownText = (
+    node: ImageNode,
+    scrapboxType: ScrapboxType,
+    markdownType: MarkdownType,
+    size = -1
+) => {
+    if (scrapboxType == ScrapboxType.Minaminao && markdownType == MarkdownType.Obsidian && size != -1) {
+        return `![|${size}00](${node.src})`;
+    } else {
+        return "![](" + node.src + ")";
+    }
 };
 
 const scrapboxNodesToMarkdownText = (nodes: Page | Node[], scrapboxType: ScrapboxType, markdownType: MarkdownType) => {
@@ -44,7 +57,14 @@ const scrapboxNodesToMarkdownText = (nodes: Page | Node[], scrapboxType: Scrapbo
             text += node.raw;
         } else if (type == "decoration") {
             if (node.rawDecos[0] == "*") {
-                if (node.rawDecos.length == 1) {
+                if (node.nodes.length == 1 && node.nodes[0].type == "image") {
+                    text += scrapboxImageNodeToMarkdownText(
+                        node.nodes[0],
+                        scrapboxType,
+                        markdownType,
+                        node.rawDecos.length
+                    );
+                } else if (node.rawDecos.length == 1) {
                     text += "**" + scrapboxNodesToMarkdownText(node.nodes, scrapboxType, markdownType) + "**";
                 } else {
                     const level = Math.max(1, 5 - node.rawDecos.length);
@@ -83,7 +103,7 @@ const scrapboxNodesToMarkdownText = (nodes: Page | Node[], scrapboxType: Scrapbo
         } else if (type == "commandLine") {
             text += "`" + node.raw + "`";
         } else if (type == "image") {
-            text += "![](" + node.src + ")";
+            text += scrapboxImageNodeToMarkdownText(node, scrapboxType, markdownType);
         } else if (type == "strong") {
             text += "**" + scrapboxNodesToMarkdownText(node.nodes, scrapboxType, markdownType) + "**";
         } else if (type == "code") {

@@ -39,7 +39,7 @@ program
                 }
             } else if (options.copyAndOutput) {
                 const title = sanitizeFilename(text.split("\n")[0]);
-                const body = markdownText.split("\n").slice(1).join("\n");
+                const body = markdownText.split("\n").slice(2).join("\n");
 
                 let dir = options.copyAndOutput;
                 if (dir.slice(-1) != "/") dir += "/";
