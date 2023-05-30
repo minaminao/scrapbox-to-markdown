@@ -13,8 +13,7 @@ const sanitizeLinkTitle = (title: string) => {
 };
 
 export const sanitizeFilename = (filename: string) => {
-    filename = filename.replace(/: /g, " - ");
-    filename = filename.replace(/:/g, " - ");
+    filename = filename.replace(/\s*[:|]\s*/g, " - ");
     return filename;
 };
 
