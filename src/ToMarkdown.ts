@@ -111,7 +111,9 @@ const scrapboxNodesToMarkdownText = (nodes: Page | Node[], scrapboxType: Scrapbo
             text += "`" + node.text + "`";
         } else if (type == "codeBlock") {
             const indentSpaces = node.indent > 0 ? " ".repeat(TAB_WIDTH * (node.indent - 1)) : "";
-            text += indentSpaces + "```" + node.fileName + "\n";
+            let fileName = node.fileName;
+            if (fileName == "py") fileName = "python";
+            text += indentSpaces + "```" + fileName + "\n";
             text += indentSpaces + node.content.split("\n").join("\n" + indentSpaces) + "\n";
             text += indentSpaces + "```\n";
         } else if (type == "table") {
@@ -120,7 +122,9 @@ const scrapboxNodesToMarkdownText = (nodes: Page | Node[], scrapboxType: Scrapbo
             for (let i = 0; i < node.cells.length; i++) {
                 const cell_line = node.cells[i];
                 for (let j = 0; j < cell_line.length; j++) {
-                    text += "|" + scrapboxNodesToMarkdownText(cell_line[j], scrapboxType, markdownType);
+                    let cellText = scrapboxNodesToMarkdownText(cell_line[j], scrapboxType, markdownType);
+                    if (cellText == "") cellText = " ";
+                    text += "|" + cellText;
                 }
                 text += "|\n";
                 if (i == 0) {
