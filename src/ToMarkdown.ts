@@ -74,6 +74,8 @@ const scrapboxNodesToMarkdownText = (nodes: Page | Node[], scrapboxType: Scrapbo
                 text += "*" + scrapboxNodesToMarkdownText(node.nodes, scrapboxType, markdownType) + "*";
             } else if (node.rawDecos[0] == "-") {
                 text += "~~" + scrapboxNodesToMarkdownText(node.nodes, scrapboxType, markdownType) + "~~";
+            } else if (node.rawDecos[0] == "!" && scrapboxType == ScrapboxType.Minaminao) {
+                text += scrapboxNodesToMarkdownText(node.nodes, scrapboxType, markdownType);
             } else {
                 console.error(node);
                 throw new Error();
