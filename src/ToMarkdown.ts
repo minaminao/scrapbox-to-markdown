@@ -14,7 +14,7 @@ const sanitizeLinkTitle = (title: string) => {
 
 export const sanitizeFilename = (filename: string) => {
     filename = filename.replace(/\s*[:|]\s*/g, " - ");
-    if (filename.match(/[\\/:|]/)) throw new Error("Invalid filename: " + filename);
+    if (filename.match(/[\\:|]/)) throw new Error("Invalid filename: " + filename);
     return filename;
 };
 
