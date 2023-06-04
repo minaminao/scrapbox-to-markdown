@@ -15,7 +15,7 @@ program
     .option("-o, --output <filepath>", "Output file path")
     .option("--obsidian", "Output in Obsidian Markdown format")
     .addOption(new Option("--minaminao").hideHelp())
-    .addOption(new Option("--copy-and-output <dir>").hideHelp())
+    .addOption(new Option("--output-dir <dir>").hideHelp())
     .addOption(new Option("--append").hideHelp())
     .action((filename, options) => {
         fs.readFile(filename, "utf8", (err, text) => {
@@ -25,6 +25,7 @@ program
 
             const scrapboxType = options.minaminao ? ScrapboxType.Minaminao : ScrapboxType.Normal;
             const markdownType = options.obsidian ? MarkdownType.Obsidian : MarkdownType.GitHub;
+
             const markdownText = scrapboxToMarkdown(text, scrapboxType, markdownType);
 
             if (options.output) {
@@ -37,11 +38,11 @@ program
                         if (err) throw new Error("Failed to write file.");
                     });
                 }
-            } else if (options.copyAndOutput) {
+            } else if (options.outputDir) {
                 const title = sanitizeFilename(text.split("\n")[0]);
                 const body = markdownText.split("\n").slice(2).join("\n");
 
-                let dir = options.copyAndOutput;
+                let dir = options.outputDir;
                 if (dir.slice(-1) != "/") dir += "/";
 
                 const filePath = dir + title + ".md";
