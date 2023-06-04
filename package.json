@@ -25,6 +25,7 @@
     "test": "pnpm tsc && node build/index.js examples/example.txt -o examples/example.md",
     "lint": "pnpm eslint --ext .ts src",
     "format": "pnpm prettier src --write src",
-    "clean": "rm -rf build"
+    "clean": "rm -rf build",
+    "all": "pnpm clean && pnpm format && pnpm lint && pnpm build && pnpm test && pnpm global-install"
   }
 }

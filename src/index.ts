@@ -12,11 +12,11 @@ program
     .description("A CLI application to convert Scrapbox text to Markdown")
     .arguments("<filename>")
     .usage("<filename> [options]")
-    .option("-o, --output <filepath>", "Output file path")
-    .option("--obsidian", "Output in Obsidian Markdown format")
+    .option("-o, --output <filepath>", "output file path")
+    .option("--obsidian", "output in Obsidian Markdown format")
+    .option("--output-dir <dir>", "output directory")
+    .option("--append", "append to output file")
     .addOption(new Option("--minaminao").hideHelp())
-    .addOption(new Option("--output-dir <dir>").hideHelp())
-    .addOption(new Option("--append").hideHelp())
     .action((filename, options) => {
         fs.readFile(filename, "utf8", (err, text) => {
             if (err) {

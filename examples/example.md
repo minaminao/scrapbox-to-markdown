@@ -11,7 +11,7 @@
 
 **External  Links** (linking to another web page)
 
-- `http://google.com` ⇒ [](http://google.com)
+- `http://google.com` ⇒ http://google.com
 - `[http://google.com Google]` ⇒ [Google](http://google.com)
 or
 
@@ -95,7 +95,7 @@ or
 
 - Typing `code:filename.extension` or `code:filename`can be used to create a new code snippet and and display it as a block
     - Language names may be abbreviated
-```
+```hello.js
 function () {
   alert(document.location.href)
   console.log("hello")
