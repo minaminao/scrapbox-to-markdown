@@ -1,6 +1,6 @@
 {
   "name": "scrapbox-to-markdown",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "bin": {
     "scrapbox-to-markdown": "build/index.js",
     "s2m": "build/index.js"
@@ -26,6 +26,6 @@
     "lint": "pnpm eslint --ext .ts src",
     "format": "pnpm prettier src --write src",
     "clean": "rm -rf build",
-    "all": "pnpm clean && pnpm format && pnpm lint && pnpm build && pnpm test && pnpm global-install"
+    "all": "pnpm clean && pnpm format && pnpm lint && pnpm test && pnpm global-install"
   }
 }

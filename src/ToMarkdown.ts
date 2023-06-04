@@ -14,6 +14,7 @@ const sanitizeLinkTitle = (title: string) => {
 
 export const sanitizeFilename = (filename: string) => {
     filename = filename.replace(/\s*[:|]\s*/g, " - ");
+    if (filename.match(/[\\/:|]/)) throw new Error("Invalid filename: " + filename);
     return filename;
 };
 
@@ -142,6 +143,8 @@ const scrapboxNodesToMarkdownText = (nodes: Page | Node[], scrapboxType: Scrapbo
             text += node.raw;
         } else if (type == "numberList") {
             text += node.rawNumber + ". " + scrapboxNodesToMarkdownText(node.nodes, scrapboxType, markdownType);
+        } else if (type == "helpfeel") {
+            text += node.raw;
         } else {
             console.error(node);
             throw new Error();
