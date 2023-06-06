@@ -61,7 +61,7 @@ program
                     if (page.title.indexOf("/") != -1) {
                         slashSanitizedTitle = page.title.replace(/\//g, "／");
                         title = sanitizeFilename(slashSanitizedTitle);
-                        bodyPrefix += `---\naliases: ${title}\n---\n`;
+                        bodyPrefix += `---\naliases: ${page.title}\n---\n`;
                     } else {
                         title = sanitizeFilename(page.title);
                     }
